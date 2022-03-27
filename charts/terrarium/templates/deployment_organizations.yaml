@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "terrarium.fullname" . }}-organizations-api
+  namespace: {{ include "terrarium.fullname" . }}
+  labels:
+    {{- include "terrarium.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.organizations_service.replicas }}
+  selector:
+    matchLabels:
+      {{- include "terrarium.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "terrarium.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ include "terrarium.fullname" . }}-regcred
+      serviceAccountName: "default"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.organizations_service.image.repository }}:{{ .Values.organizations_service.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.organizations_service.image.pullPolicy }}
+          command: ["/terrarium-organizations", "serve"]
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: AWS_ACCESS_KEY_ID
+                  optional: false
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: AWS_SECRET_ACCESS_KEY
+                  optional: false
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: AWS_DEFAULT_REGION
+                  optional: false
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+            - name: grpc
+              containerPort: 3001
+          livenessProbe:
+            httpGet:
+              path: /v1/
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /v1/
+              port: http

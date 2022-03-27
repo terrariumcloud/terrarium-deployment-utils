@@ -1,0 +1,7 @@
+fullnameOverride: terrarium
+organizations_service:
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium-organizations
+    tag: latest
+    pullPolicy: IfNotPresent
