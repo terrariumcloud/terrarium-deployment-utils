@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "terrarium.fullname" . }}-organizations-api
+  namespace: {{ include "terrarium.fullname" . }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "terrarium.selectorLabels" . | nindent 8 }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+    - name: grpc
+      port: 8080
+      targetPort: 3001
+      protocol: TCP
