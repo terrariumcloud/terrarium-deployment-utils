@@ -49,3 +49,7 @@ Selector labels
 app.kubernetes.io/name: {{ include "terrarium.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.orgSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-organizations-api
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

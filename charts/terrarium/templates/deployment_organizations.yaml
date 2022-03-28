@@ -9,11 +9,11 @@ spec:
   replicas: {{ .Values.organizations_service.replicas }}
   selector:
     matchLabels:
-      {{- include "terrarium.selectorLabels" . | nindent 6 }}
+      {{- include "terrarium.orgSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "terrarium.selectorLabels" . | nindent 8 }}
+        {{- include "terrarium.orgSelectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ include "terrarium.fullname" . }}-regcred
