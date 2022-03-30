@@ -4,4 +4,11 @@ organizations_service:
   image:
     repository: ghcr.io/terrariumcloud/terrarium-organizations
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
+modules_service:
+  replicas: 1
+  bucket_name: "terrarium-dev"
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium-modules
+    tag: latest
+    pullPolicy: Always

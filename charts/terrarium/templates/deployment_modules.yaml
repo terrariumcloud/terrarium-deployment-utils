@@ -1,29 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "terrarium.fullname" . }}-organizations-api
+  name: {{ include "terrarium.fullname" . }}-modules-api
   namespace: {{ include "terrarium.fullname" . }}
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.organizations_service.replicas }}
+  replicas: {{ .Values.modules_service.replicas }}
   selector:
     matchLabels:
-      {{- include "terrarium.orgSelectorLabels" . | nindent 6 }}
+      {{- include "terrarium.moduleSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "terrarium.orgSelectorLabels" . | nindent 8 }}
+        {{- include "terrarium.moduleSelectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ include "terrarium.fullname" . }}-regcred
       serviceAccountName: "default"
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.organizations_service.image.repository }}:{{ .Values.organizations_service.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.organizations_service.image.pullPolicy }}
-          args: 
+          image: "{{ .Values.modules_service.image.repository }}:{{ .Values.modules_service.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.modules_service.image.pullPolicy }}
+          args:
             - "serve"
+            - "-o"
+            - "$(ORG_ENDPOINT)"
+            - "--aws-region"
+            - "$(AWS_DEFAULT_REGION)"
+            - "-b"
+            - "$(BUCKET_NAME)"
           env:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
@@ -43,6 +49,16 @@ spec:
                   name: {{ include "terrarium.fullname" . }}
                   key: AWS_DEFAULT_REGION
                   optional: false
+            - name: BUCKET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-modules-api-cm
+                  key: BUCKET_NAME
+            - name: ORG_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-modules-api-cm
+                  key: ORG_ENDPOINT
           ports:
             - name: http
               containerPort: 3000
