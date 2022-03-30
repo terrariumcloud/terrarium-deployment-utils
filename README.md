@@ -4,7 +4,7 @@ A repo for Terrarium Deployment Utilities such as Helm charts and Terraform modu
 
 ## Deployment
 
-1. Clone this repo and ensure you are authenticated with the cluster you want to deploy to
+1. Download a [relevant release](https://github.com/terrariumcloud/terrarium-deployment-utils/releases)
 1. Create a `secretValues.yml` and populate it with the following content substituting your values
 
 ```
@@ -16,4 +16,4 @@ modules_service:
   bucket_name: <MODULES_BUCKET_NAME>
 ```
 
-1. Execute `helm install terrarium . -f secretValues.yml`
+1. Execute `helm install terrarium ./<PATH_TO CHART_ZIP> -f secretValues.yml`
