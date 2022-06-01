@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "terrarium.fullname" . }}-ingress
+  namespace: {{ include "terrarium.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  tls:
+  - hosts:
+      - {{ .Values.ingress.host }}
+    secretName: {{ include "terrarium.fullname" . }}-ingress
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: {{ .Values.web_service.ingress.path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "terrarium.fullname" . }}-web-ui
+            port:
+              name: http
+      - path: {{ .Values.organizations_service.ingress.path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "terrarium.fullname" . }}-organizations-api
+            port:
+              name: http
+      - path: {{ .Values.modules_service.ingress.path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "terrarium.fullname" . }}-modules-api
+            port:
+              name: http
