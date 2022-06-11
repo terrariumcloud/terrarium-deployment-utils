@@ -3,7 +3,7 @@ organizations_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium-organizations
-    tag: v0.0.1
+    tag: v0.0.11
     pullPolicy: Always
 modules_service:
   replicas: 1
