@@ -12,3 +12,6 @@ modules_service:
     repository: ghcr.io/terrariumcloud/terrarium-modules
     tag: v0.0.1
     pullPolicy: Always
+web_service:
+  image:
+    tag: v0.0.4
