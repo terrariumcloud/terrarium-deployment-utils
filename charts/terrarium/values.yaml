@@ -10,5 +10,5 @@ modules_service:
   bucket_name: "terrarium-dev"
   image:
     repository: ghcr.io/terrariumcloud/terrarium-modules
-    tag: v0.0.1
+    tag: v0.0.6
     pullPolicy: Always
