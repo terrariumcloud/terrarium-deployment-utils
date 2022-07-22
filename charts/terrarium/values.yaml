@@ -12,3 +12,33 @@ modules_service:
     repository: ghcr.io/terrariumcloud/terrarium-modules
     tag: v0.0.1
     pullPolicy: Always
+gateway:
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium
+    tag: v0.0.4
+    pullPolicy: Always
+creation_service:
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium
+    tag: v0.0.4
+    pullPolicy: Always
+dependency_service:
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium
+    tag: v0.0.4
+    pullPolicy: Always
+session_service:
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium
+    tag: v0.0.4
+    pullPolicy: Always
+storage_service:
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium
+    tag: v0.0.4
+    pullPolicy: Always
