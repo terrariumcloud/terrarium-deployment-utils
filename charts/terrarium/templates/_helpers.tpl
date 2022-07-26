@@ -57,3 +57,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-modules-api
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.webSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-web-ui
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
