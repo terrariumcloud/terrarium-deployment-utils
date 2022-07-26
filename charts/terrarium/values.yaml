@@ -24,3 +24,6 @@ web_service:
     repository: ghcr.io/terrariumcloud/terrarium-ui
     tag: v0.0.3
     pullPolicy: Always
+web_service:
+  image:
+    tag: v0.0.5
