@@ -1,6 +1,8 @@
 fullnameOverride: terrarium
 organizations_service:
   replicas: 1
+  ingress:
+    path: /organizations/v1
   image:
     repository: ghcr.io/terrariumcloud/terrarium-organizations
     tag: v0.0.11
@@ -8,7 +10,20 @@ organizations_service:
 modules_service:
   replicas: 1
   bucket_name: "terrarium-dev"
+  ingress:
+    path: /modules/v1
   image:
     repository: ghcr.io/terrariumcloud/terrarium-modules
-    tag: v0.0.1
+    tag: v0.0.6
     pullPolicy: Always
+web_service:
+  replicas: 1
+  ingress:
+    path: /
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium-ui
+    tag: v0.0.3
+    pullPolicy: Always
+web_service:
+  image:
+    tag: v0.0.5

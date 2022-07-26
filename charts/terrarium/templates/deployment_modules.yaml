@@ -67,9 +67,9 @@ spec:
               containerPort: 3001
           livenessProbe:
             httpGet:
-              path: /v1/
+              path: /modules/v1/
               port: http
           readinessProbe:
             httpGet:
-              path: /v1/
+              path: /modules/v1/
               port: http

@@ -51,9 +51,9 @@ spec:
               containerPort: 3001
           livenessProbe:
             httpGet:
-              path: /v1/
+              path: /organizations/v1/
               port: http
           readinessProbe:
             httpGet:
-              path: /v1/
+              path: /organizations/v1/
               port: http

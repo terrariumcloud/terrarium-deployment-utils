@@ -14,6 +14,11 @@ aws_region: <BASE64_ENCODED_AWS_REGION>
 imagePullSecret: <BASE64_ENCODED_DOCKER_SECRET>
 modules_service:
   bucket_name: <MODULES_BUCKET_NAME>
+ingress:
+  host: <HOSTNAME>
+tls:
+  crt: <TLS_CERTIFICATE>
+  key: <TLS_KEY>
 ```
 
 1. Execute `helm install terrarium ./<PATH_TO CHART_ZIP> -f secretValues.yml`
