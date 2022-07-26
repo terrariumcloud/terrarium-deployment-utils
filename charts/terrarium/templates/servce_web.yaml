@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "terrarium.fullname" . }}-web-ui
+  namespace: {{ include "terrarium.fullname" . }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "terrarium.webSelectorLabels" . | nindent 8 }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+      
