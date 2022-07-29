@@ -14,6 +14,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ include "terrarium.fullname" . }}-organizations-grpc
+            name: {{ include "terrarium.fullname" . }}-gateway-grpc
             port:
               name: grpc

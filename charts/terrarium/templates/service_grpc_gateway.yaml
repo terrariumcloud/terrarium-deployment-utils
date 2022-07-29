@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "terrarium.fullname" . }}-organizations-grpc
+  name: {{ include "terrarium.fullname" . }}-gateway-grpc
   namespace: {{ include "terrarium.fullname" . }}
   annotations:
     traefik.ingress.kubernetes.io/service.serversscheme: h2c
 spec:
   type: ClusterIP
   selector:
-    {{- include "terrarium.orgSelectorLabels" . | nindent 8 }}
+    {{- include "terrarium.gatewaySelectorLabels" . | nindent 8 }}
   ports:
     - name: grpc
       port: 8080
