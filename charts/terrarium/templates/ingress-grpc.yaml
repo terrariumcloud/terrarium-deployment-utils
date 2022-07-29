@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "terrarium.fullname" . }}-ingress-grpc
+  namespace: {{ include "terrarium.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: terrarium-grpc.infra.synamedia.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "terrarium.fullname" . }}-organizations-grpc
+            port:
+              name: grpc
