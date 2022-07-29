@@ -75,6 +75,8 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 {{- define "terrarium.storageSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-storage-api
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 {{- define "terrarium.webSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-web-ui
 app.kubernetes.io/instance: {{ .Release.Name }}
