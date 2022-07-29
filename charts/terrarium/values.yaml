@@ -1,44 +1,56 @@
 fullnameOverride: terrarium
 organizations_service:
   replicas: 1
+  ingress:
+    path: /organizations/v1
   image:
     repository: ghcr.io/terrariumcloud/terrarium-organizations
-    tag: v0.0.1
+    tag: v0.0.11
     pullPolicy: Always
 modules_service:
   replicas: 1
   bucket_name: "terrarium-dev"
+  ingress:
+    path: /modules/v1
   image:
     repository: ghcr.io/terrariumcloud/terrarium-modules
-    tag: v0.0.1
+    tag: v0.0.6
     pullPolicy: Always
 gateway:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.4
+    tag: v0.0.5
     pullPolicy: Always
 creation_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.4
+    tag: v0.0.5
     pullPolicy: Always
 dependency_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.4
+    tag: v0.0.5
     pullPolicy: Always
 session_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.4
+    tag: v0.0.5
     pullPolicy: Always
 storage_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.4
+    tag: v0.0.5
+    pullPolicy: Always
+web_service:
+  replicas: 1
+  ingress:
+    path: /
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium-ui
+    tag: v0.0.5
     pullPolicy: Always
