@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: {{ include "terrarium.fullname" . }}-gateway-cm
+    namespace: {{ include "terrarium.fullname" . }}
+data:
+  CREATION_ENDPOINT: {{ include "terrarium.fullname" . }}-creation-api.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
+  SESSION_ENDPOINT: {{ include "terrarium.fullname" . }}-session-api.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
+  DEPENDENCY_ENDPOINT: {{ include "terrarium.fullname" . }}-dependency-api.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
+  STORAGE_ENDPOINT: {{ include "terrarium.fullname" . }}-storage-api.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
