@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "terrarium.fullname" . }}-dependency-api
+  name: {{ include "terrarium.fullname" . }}-dependency-manager
   namespace: {{ include "terrarium.fullname" . }}
 spec:
   type: ClusterIP
   selector:
-    {{- include "terrarium.dependencySelectorLabels" . | nindent 8 }}
+    {{- include "terrarium.dependencyManagerSelectorLabels" . | nindent 8 }}
   ports:
     - name: grpc
       port: 8080

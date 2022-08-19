@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "terrarium.fullname" . }}-dependency-api
+  name: {{ include "terrarium.fullname" . }}-dependency-manager
   namespace: {{ include "terrarium.fullname" . }}
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.dependency_service.replicas }}
+  replicas: {{ .Values.dependencyManager.replicas }}
   selector:
     matchLabels:
-      {{- include "terrarium.dependencySelectorLabels" . | nindent 6 }}
+      {{- include "terrarium.dependencyManagerSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "terrarium.dependencySelectorLabels" . | nindent 8 }}
+        {{- include "terrarium.dependencyManagerSelectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ include "terrarium.fullname" . }}-regcred
       serviceAccountName: "default"
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.dependency_service.image.repository }}:{{ .Values.dependency_service.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.dependency_service.image.pullPolicy }}
+          image: "{{ .Values.dependencyManager.image.repository }}:{{ .Values.dependencyManager.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.dependencyManager.image.pullPolicy }}
           args: 
-            - "dependency-service"
-            - "--aws-access-key"
+            - "dependency-manager"
+            - "--aws-access-key-id"
             - "$(AWS_ACCESS_KEY_ID)"
-            - "--aws-secret-key"
+            - "--aws-secret-access-key"
             - "$(AWS_SECRET_ACCESS_KEY)"
             - "--aws-region"
             - "$(AWS_DEFAULT_REGION)"

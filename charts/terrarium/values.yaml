@@ -20,31 +20,31 @@ gateway:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.5
+    tag: v0.0.7
     pullPolicy: Always
-creation_service:
+registrar:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.5
+    tag: v0.0.7
     pullPolicy: Always
-dependency_service:
+dependencyManager:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.5
+    tag: v0.0.7
     pullPolicy: Always
-session_service:
+versionManager:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.5
+    tag: v0.0.7
     pullPolicy: Always
-storage_service:
+storage:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.5
+    tag: v0.0.7
     pullPolicy: Always
 web_service:
   replicas: 1

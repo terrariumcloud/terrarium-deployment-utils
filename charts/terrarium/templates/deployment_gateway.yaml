@@ -24,17 +24,17 @@ spec:
           imagePullPolicy: {{ .Values.gateway.image.pullPolicy }}
           args: 
             - "gateway"
-            - "--creation-service"
-            - "$(CREATION_ENDPOINT)"
-            - "--dependency-service"
-            - "$(DEPENDENCY_ENDPOINT)"
-            - "--session-service"
-            - "$(SESSION_ENDPOINT)"
-            - "--storage-service"
+            - "--registrar"
+            - "$(REGISTRAR_ENDPOINT)"
+            - "--dependency-manager"
+            - "$(DEPENDENCY_MANAGER_ENDPOINT)"
+            - "--version-manager"
+            - "$(VERSION_MANAGER_ENDPOINT)"
+            - "--storage"
             - "$(STORAGE_ENDPOINT)"
-            - "--aws-access-key"
+            - "--aws-access-key-id"
             - "$(AWS_ACCESS_KEY_ID)"
-            - "--aws-secret-key"
+            - "--aws-secret-access-key"
             - "$(AWS_SECRET_ACCESS_KEY)"
             - "--aws-region"
             - "$(AWS_DEFAULT_REGION)"
@@ -57,21 +57,21 @@ spec:
                   name: {{ include "terrarium.fullname" . }}
                   key: AWS_DEFAULT_REGION
                   optional: false
-            - name: CREATION_ENDPOINT
+            - name: REGISTRAR_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
-                  key: CREATION_ENDPOINT
-            - name: SESSION_ENDPOINT
+                  key: REGISTRAR_ENDPOINT
+            - name: VERSION_MANAGER_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
-                  key: SESSION_ENDPOINT
-            - name: DEPENDENCY_ENDPOINT
+                  key: VERSION_MANAGER_ENDPOINT
+            - name: DEPENDENCY_MANAGER_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
-                  key: DEPENDENCY_ENDPOINT
+                  key: DEPENDENCY_MANAGER_ENDPOINT
             - name: STORAGE_ENDPOINT
               valueFrom:
                 configMapKeyRef:

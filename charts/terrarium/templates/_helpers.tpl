@@ -61,20 +61,20 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-gateway
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-{{- define "terrarium.creationSelectorLabels" -}}
-app.kubernetes.io/name: {{ include "terrarium.name" . }}-creation-api
+{{- define "terrarium.registrarSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-registrar
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-{{- define "terrarium.dependencySelectorLabels" -}}
-app.kubernetes.io/name: {{ include "terrarium.name" . }}-dependency-api
+{{- define "terrarium.dependencyManagerSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-dependency
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-{{- define "terrarium.sessionSelectorLabels" -}}
-app.kubernetes.io/name: {{ include "terrarium.name" . }}-session-api
+{{- define "terrarium.versionManagerSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-version-manager
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 {{- define "terrarium.storageSelectorLabels" -}}
-app.kubernetes.io/name: {{ include "terrarium.name" . }}-storage-api
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-storage
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 {{- define "terrarium.webSelectorLabels" -}}

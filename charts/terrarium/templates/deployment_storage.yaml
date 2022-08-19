@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "terrarium.fullname" . }}-storage-api
+  name: {{ include "terrarium.fullname" . }}-storage
   namespace: {{ include "terrarium.fullname" . }}
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.storage_service.replicas }}
+  replicas: {{ .Values.storage.replicas }}
   selector:
     matchLabels:
       {{- include "terrarium.storageSelectorLabels" . | nindent 6 }}
@@ -20,13 +20,13 @@ spec:
       serviceAccountName: "default"
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.storage_service.image.repository }}:{{ .Values.storage_service.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.storage_service.image.pullPolicy }}
+          image: "{{ .Values.storage.image.repository }}:{{ .Values.storage.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.storage.image.pullPolicy }}
           args: 
-            - "storage-service"
-            - "--aws-access-key"
+            - "storage"
+            - "--aws-access-key-id"
             - "$(AWS_ACCESS_KEY_ID)"
-            - "--aws-secret-key"
+            - "--aws-secret-access-key"
             - "$(AWS_SECRET_ACCESS_KEY)"
             - "--aws-region"
             - "$(AWS_DEFAULT_REGION)"

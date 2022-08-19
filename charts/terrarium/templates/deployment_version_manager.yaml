@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "terrarium.fullname" . }}-creation-api
+  name: {{ include "terrarium.fullname" . }}-version-manager
   namespace: {{ include "terrarium.fullname" . }}
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.creation_service.replicas }}
+  replicas: {{ .Values.versionManager.replicas }}
   selector:
     matchLabels:
-      {{- include "terrarium.creationSelectorLabels" . | nindent 6 }}
+      {{- include "terrarium.versionManagerSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "terrarium.creationSelectorLabels" . | nindent 8 }}
+        {{- include "terrarium.versionManagerSelectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ include "terrarium.fullname" . }}-regcred
       serviceAccountName: "default"
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.creation_service.image.repository }}:{{ .Values.creation_service.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.creation_service.image.pullPolicy }}
+          image: "{{ .Values.versionManager.image.repository }}:{{ .Values.versionManager.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.versionManager.image.pullPolicy }}
           args: 
-            - "creation-service"
-            - "--aws-access-key"
+            - "version-manager"
+            - "--aws-access-key-id"
             - "$(AWS_ACCESS_KEY_ID)"
-            - "--aws-secret-key"
+            - "--aws-secret-access-key"
             - "$(AWS_SECRET_ACCESS_KEY)"
             - "--aws-region"
             - "$(AWS_DEFAULT_REGION)"
