@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "terrarium.fullname" . }}-registrar
+  namespace: {{ include "terrarium.fullname" . }}
+  labels:
+    {{- include "terrarium.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.registrar.replicas }}
+  selector:
+    matchLabels:
+      {{- include "terrarium.registrarSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "terrarium.registrarSelectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ include "terrarium.fullname" . }}-regcred
+      serviceAccountName: "default"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.registrar.image.repository }}:{{ .Values.registrar.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.registrar.image.pullPolicy }}
+          args: 
+            - "registrar"
+            - "--aws-access-key-id"
+            - "$(AWS_ACCESS_KEY_ID)"
+            - "--aws-secret-access-key"
+            - "$(AWS_SECRET_ACCESS_KEY)"
+            - "--aws-region"
+            - "$(AWS_DEFAULT_REGION)"
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: AWS_ACCESS_KEY_ID
+                  optional: false
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: AWS_SECRET_ACCESS_KEY
+                  optional: false
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: AWS_DEFAULT_REGION
+                  optional: false
+          ports:
+            - name: grpc
+              containerPort: 3001
