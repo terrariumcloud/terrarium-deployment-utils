@@ -49,12 +49,8 @@ Selector labels
 app.kubernetes.io/name: {{ include "terrarium.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-{{- define "terrarium.orgSelectorLabels" -}}
-app.kubernetes.io/name: {{ include "terrarium.name" . }}-organizations-api
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-{{- define "terrarium.moduleSelectorLabels" -}}
-app.kubernetes.io/name: {{ include "terrarium.name" . }}-modules-api
+{{- define "terrarium.modulesAPIV1SelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-modules-api-v1
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 {{- define "terrarium.gatewaySelectorLabels" -}}
