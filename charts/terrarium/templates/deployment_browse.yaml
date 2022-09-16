@@ -1,37 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "terrarium.fullname" . }}-modules-api-v1
+  name: {{ include "terrarium.fullname" . }}-browse
   namespace: {{ include "terrarium.fullname" . }}
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.modules_api_v1_service.replicas }}
+  replicas: {{ .Values.browse_service.replicas }}
   selector:
     matchLabels:
-      {{- include "terrarium.modulesAPIV1SelectorLabels" . | nindent 6 }}
+      {{- include "terrarium.browseSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "terrarium.modulesAPIV1SelectorLabels" . | nindent 8 }}
+        {{- include "terrarium.browseSelectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ include "terrarium.fullname" . }}-regcred
       serviceAccountName: "default"
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.modules_api_v1_service.image.repository }}:{{ .Values.modules_api_v1_service.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.modules_api_v1_service.image.pullPolicy }}
+          image: "{{ .Values.browse_service.image.repository }}:{{ .Values.browse_service.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.browse_service.image.pullPolicy }}
           args:
-            - "modules.v1"
+            - "browse"
             - "--endpoint"
             - "0.0.0.0:3000"
-            - "--mount-path"
-            - "/modules"
-            - "--version-manager"
-            - "$(VERSION_MANAGER_ENDPOINT)"
-            - "--storage"
-            - "$(STORAGE_ENDPOINT)"
+            - "--registrar"
+            - "$(REGISTRAR_ENDPOINT)"
             - "--aws-access-key-id"
             - "not-used"
             - "--aws-region"
@@ -39,16 +35,11 @@ spec:
             - "--aws-secret-access-key"
             - "not-used"
           env:
-            - name: VERSION_MANAGER_ENDPOINT
+            - name: REGISTRAR_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
-                  key: VERSION_MANAGER_ENDPOINT
-            - name: STORAGE_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "terrarium.fullname" . }}-gateway-cm
-                  key: STORAGE_ENDPOINT
+                  key: REGISTRAR_ENDPOINT
           ports:
             - name: http
               containerPort: 3000

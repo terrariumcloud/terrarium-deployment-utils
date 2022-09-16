@@ -9,6 +9,15 @@ modules_api_v1_service:
     tag: v0.0.12
     pullPolicy: Always
 
+browse_service:
+  ingress:
+    path: /api
+  replicas: 1
+  image:
+    repository: ghcr.io/terrariumcloud/terrarium
+    tag: v0.0.12
+    pullPolicy: Always
+
 gateway:
   replicas: 1
   image:
