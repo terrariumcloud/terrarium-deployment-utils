@@ -29,3 +29,10 @@ spec:
             name: {{ include "terrarium.fullname" . }}-modules-api-v1
             port:
               name: http
+      - path: {{ .Values.browse_service.ingress.path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "terrarium.fullname" . }}-browse
+            port:
+              name: http
