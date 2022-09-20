@@ -1,5 +1,4 @@
 fullnameOverride: terrarium
-
 modules_api_v1_service:
   ingress:
     path: /modules/v1
@@ -8,47 +7,41 @@ modules_api_v1_service:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.12
     pullPolicy: Always
-
 gateway:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.12
     pullPolicy: Always
-
 registrar:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.12
     pullPolicy: Always
-
 dependencyManager:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.12
     pullPolicy: Always
-
 versionManager:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.12
     pullPolicy: Always
-
 storage:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.12
     pullPolicy: Always
-
 web_service:
   replicas: 1
   ingress:
     path: /
   image:
     repository: ghcr.io/terrariumcloud/terrarium-ui
-    tag: v0.0.5
+    tag: v0.0.6
     pullPolicy: Always
