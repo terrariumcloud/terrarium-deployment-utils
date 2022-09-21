@@ -51,5 +51,5 @@ web_service:
     path: /
   image:
     repository: ghcr.io/terrariumcloud/terrarium-ui
-    tag: v0.0.9
+    tag: v0.0.10
     pullPolicy: Always
