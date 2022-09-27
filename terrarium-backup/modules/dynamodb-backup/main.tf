@@ -53,7 +53,6 @@ resource "aws_backup_selection" "terrarium_dynamodb_backup_selection" {
   name         = var.terrarium_dynamodb_backup_selection_name
   plan_id      = aws_backup_plan.terrarium_dynamodb_backup_plan.id
   resources = [
-    # "arn:aws:dynamodb:eu-central-1:341495406858:table/modules",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_modules}",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_versions}",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_dependencies}"

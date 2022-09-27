@@ -51,7 +51,6 @@ resource "aws_backup_selection" "terrarium_s3_backup_selection" {
   name         = var.terrarium_s3_backup_selection_name
   plan_id      = aws_backup_plan.terrarium_s3_backup_plan.id
   resources = [
-    # "arn:aws:s3:::terrarium-modules"
     "arn:aws:s3:::${var.terrarium_s3_bucket_modules}",
   ]
 }
