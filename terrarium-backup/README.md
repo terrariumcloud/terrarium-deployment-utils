@@ -25,7 +25,9 @@ In order for Terraform to create an IAM role and to be able to create KMS keys f
 The default `AWSKeyManagementServicePowerUser` policy does not include schedule key deletion permission which prevents KMS keys from being deleted. For this reason, create a custom policy, i.e. `CustomKMSScheduleKeyDeletion` with `kms:ScheduleKeyDeletion` action.
 
 ### Managing backups for new tables or S3 buckets
-If you want to create backups for a table that's not specified in the current implementation, you need to add the ARN of that resource to a set of resources that are assigned to a backup plan i.e. you need to update the backup selection. To do that, go to `dynamodb-backup/main.tf` add modify the `aws_backup_selection` resource list to include the ARN of the newly created table.
+If you want to create backups for a table that's not specified in the current implementation, you need to add the ARN of that resource to a set of resources that are assigned to a backup plan i.e. you need to update the backup selection. To do that, go to `dynamodb-backup/main.tf` and modify the `aws_backup_selection` resource list to include the ARN of the newly created table.
+
+The ARN is always going the have the same structure, you just need to add a table name.
 
 ```
 arn:aws:dynamodb:${local.region}:${local.account_id}:table/YOUR_TABLE
@@ -44,7 +46,7 @@ resource "aws_backup_selection" "terrarium_dynamodb_backup_selection" {
 }
 
 ```
-The same logic can be applied to creating backups for additional S3 buckets. You can go to `s3-backup/main.tf` and add modify the `aws_backup_selection` resource list to include the ARN of the newly created bucket.
+The same logic can be applied to creating backups for additional S3 buckets. You can go to `s3-backup/main.tf` and modify the `aws_backup_selection` resource list to include the ARN of the newly created bucket.
 
 ```
 arn:aws:s3:::YOUR_BUCKET
