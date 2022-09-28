@@ -24,6 +24,44 @@ In order for Terraform to create an IAM role and to be able to create KMS keys f
 
 The default `AWSKeyManagementServicePowerUser` policy does not include schedule key deletion permission which prevents KMS keys from being deleted. For this reason, create a custom policy, i.e. `CustomKMSScheduleKeyDeletion` with `kms:ScheduleKeyDeletion` action.
 
+### Managing backups for new tables or S3 buckets
+If you want to create backups for a table that's not specified in the current implementation, you need to add the ARN of that resource to a set of resources that are assigned to a backup plan i.e. you need to update the backup selection. To do that, go to `dynamodb-backup/main.tf` add modify the `aws_backup_selection` resource list to include the ARN of the newly created table.
+
+```
+arn:aws:dynamodb:${local.region}:${local.account_id}:table/YOUR_TABLE
+```
+
+```
+resource "aws_backup_selection" "terrarium_dynamodb_backup_selection" {
+  iam_role_arn = aws_iam_role.terrarium_dynamodb_backup_iam_role.arn
+  name         = var.terrarium_dynamodb_backup_selection_name
+  plan_id      = aws_backup_plan.terrarium_dynamodb_backup_plan.id
+  resources = [
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_modules}",
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_versions}",
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_dependencies}"
+  ]
+}
+
+```
+The same logic can be applied to creating backups for additional S3 buckets. You can go to `s3-backup/main.tf` and add modify the `aws_backup_selection` resource list to include the ARN of the newly created bucket.
+
+```
+arn:aws:s3:::YOUR_BUCKET
+```
+
+```
+resource "aws_backup_selection" "terrarium_s3_backup_selection" {
+  iam_role_arn = aws_iam_role.terrarium_s3_backup_iam_role.arn
+  name         = var.terrarium_s3_backup_selection_name
+  plan_id      = aws_backup_plan.terrarium_s3_backup_plan.id
+  resources = [
+    "arn:aws:s3:::${var.terrarium_s3_bucket_modules}",
+  ]
+}
+```
+
+
 ### Notes
 DynamoDB backup and S3 backup are implemented as Terraform modules that can be reusable.
 
