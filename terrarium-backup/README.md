@@ -43,7 +43,7 @@ export AWS_SECRET_ACCESS_KEY=TERRARIUM_USER_SECRET_KEY
 export AWS_REGION=TERRRIUM_REGION
 ```
 
-
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
