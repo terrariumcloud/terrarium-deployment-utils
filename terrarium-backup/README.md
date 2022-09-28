@@ -40,7 +40,7 @@ Before Terraform deployment, export environment variables.
 ```
 export AWS_ACCESS_KEY_ID=TERRARIUM_USER_KEY
 export AWS_SECRET_ACCESS_KEY=TERRARIUM_USER_SECRET_KEY
-export AWS_REGION=TERRRIUM_REGION
+export AWS_REGION=TERRARIUM_REGION
 ```
 
 <!-- BEGIN_TF_DOCS -->

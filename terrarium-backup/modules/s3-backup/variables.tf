@@ -11,7 +11,6 @@ variable "terrarium_s3_backup_iam_role_name" {
   description = "The name of an IAM role for S3 AWS Backups"
 }
 
-# Define policy ARNs as list
 variable "terrarium_s3_backup_iam_policy_arn" {
   type        = list(string)
   description = "Set of managed IAM Backup Policies for S3 to be attached to role"
@@ -34,6 +33,7 @@ variable "terrarium_s3_backup_vault_name" {
   type        = string
   description = "The name of the backup vault for S3"
 }
+
 # BACKUP PLAN
 variable "terrarium_s3_backup_plan_name" {
   type        = string

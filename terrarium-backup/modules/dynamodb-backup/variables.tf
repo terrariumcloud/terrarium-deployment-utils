@@ -10,7 +10,7 @@ variable "terrarium_dynamodb_backup_iam_role_name" {
   type        = string
   description = "The name of an IAM role for DynamoDB AWS Backups"
 }
-#TODO Define policy ARNs as list
+
 variable "terrarium_dynamodb_backup_iam_policy_arn" {
   type        = list(string)
   description = "Set of managed IAM Backup Policies for DynamoDB to be attached to role"

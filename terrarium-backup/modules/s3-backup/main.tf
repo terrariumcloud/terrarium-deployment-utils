@@ -20,6 +20,7 @@ resource "aws_backup_vault" "terrarium_s3_backup_vault" {
   kms_key_arn = aws_kms_key.terrarium_s3_kms_key.arn
   force_destroy = true
 }
+
 # Backup plan for S3
 resource "aws_backup_plan" "terrarium_s3_backup_plan" {
   name = var.terrarium_s3_backup_plan_name
