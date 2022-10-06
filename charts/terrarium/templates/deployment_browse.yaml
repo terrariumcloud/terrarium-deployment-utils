@@ -28,6 +28,8 @@ spec:
             - "0.0.0.0:3000"
             - "--registrar"
             - "$(REGISTRAR_ENDPOINT)"
+            - "--version-manager"
+            - "$(VERSION_MANAGER_ENDPOINT)"
             - "--aws-access-key-id"
             - "not-used"
             - "--aws-region"
@@ -40,11 +42,15 @@ spec:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
                   key: REGISTRAR_ENDPOINT
+            - name: VERSION_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: VERSION_MANAGER_ENDPOINT
           ports:
             - name: http
               containerPort: 3000
               protocol: TCP
-
           livenessProbe:
             httpGet:
               path: /healthz
