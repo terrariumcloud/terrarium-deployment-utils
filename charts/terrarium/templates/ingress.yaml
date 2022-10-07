@@ -15,13 +15,6 @@ spec:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: {{ .Values.web_service.ingress.path }}
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ include "terrarium.fullname" . }}-web-ui
-            port:
-              name: http
       - path: {{ .Values.modules_api_v1_service.ingress.path }}
         pathType: Prefix
         backend:
