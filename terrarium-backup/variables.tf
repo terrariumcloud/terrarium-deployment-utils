@@ -25,6 +25,11 @@ variable "terrarium_table_module_dependencies" {
   description = "Terrarium DynamoDB Table for terrarium module dependencies"
 }
 
+variable "terrarium_table_container_dependencies" {
+  type        = string
+  description = "Terrarium DynamoDB Table for terrarium container dependencies"
+}
+
 # IAM DynamoDB
 variable "terrarium_dynamodb_backup_iam_role_name" {
   type        = string

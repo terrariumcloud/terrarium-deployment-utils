@@ -32,6 +32,11 @@ variable "terrarium_table_module_dependencies" {
   description = "Terrarium DynamoDB Table for terrarium module dependencies"
 }
 
+variable "terrarium_table_container_dependencies" {
+  type        = string
+  description = "Terrarium DynamoDB Table for terrarium container dependencies"
+}
+
 # KMS
 variable "terrarium_dynamodb_kms_key_name" {
   type        = string
