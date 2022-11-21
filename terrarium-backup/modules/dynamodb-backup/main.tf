@@ -56,5 +56,6 @@ resource "aws_backup_selection" "terrarium_dynamodb_backup_selection" {
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_modules}",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_versions}",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_dependencies}"
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_container_dependencies}"
   ]
 }

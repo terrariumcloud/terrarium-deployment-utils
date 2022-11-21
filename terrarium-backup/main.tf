@@ -15,6 +15,7 @@ module "dynamodb-backup" {
   terrarium_table_modules                     = var.terrarium_table_modules
   terrarium_table_module_versions             = var.terrarium_table_module_versions
   terrarium_table_module_dependencies         = var.terrarium_table_module_dependencies
+  terrarium_table_container_dependencies      = var.terrarium_table_container_dependencies
   kms_key_alias_prefix                        = var.kms_key_alias_prefix
   terrarium_dynamodb_kms_key_name             = var.terrarium_dynamodb_kms_key_name
   terrarium_dynamodb_backup_iam_role_name     = var.terrarium_dynamodb_backup_iam_role_name
