@@ -5,7 +5,7 @@ modules_api_v1_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
 browse_service:
   ingress:
@@ -13,35 +13,35 @@ browse_service:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
 gateway:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
 registrar:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
 dependencyManager:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
 versionManager:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
 storage:
   replicas: 1
   image:
     repository: ghcr.io/terrariumcloud/terrarium
-    tag: v0.0.25
+    tag: v0.0.27
     pullPolicy: Always
