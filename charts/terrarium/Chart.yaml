@@ -1,6 +1,10 @@
 apiVersion: v2
 name: terrarium
 description: A Helm chart for Kubernetes
+maintainers:
+  - name: adcharre
+  - name: odelanno
+  - name: frennky
 
 # A chart can be either an 'application' or a 'library' chart.
 #
