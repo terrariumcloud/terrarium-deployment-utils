@@ -45,3 +45,15 @@ storage:
     repository: ghcr.io/terrariumcloud/terrarium
     tag: v0.0.28
     pullPolicy: Always
+
+aws_access_key_id: dGVzdAo=
+aws_access_key_secret: dGVzdAo=
+aws_region: dGVzdAo=
+imagePullSecret: dGVzdAo=
+modules_service:
+  bucket_name: dGVzdAo=
+ingress:
+  host: terrarium.com
+tls:
+  crt: dGVzdAo=
+  key: dGVzdAo=
