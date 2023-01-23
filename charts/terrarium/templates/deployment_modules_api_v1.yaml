@@ -49,6 +49,7 @@ spec:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
                   key: STORAGE_ENDPOINT
+            {{ include "terrarium.otelEndpoint" . | nindent 12 }}
           ports:
             - name: http
               containerPort: 3000
