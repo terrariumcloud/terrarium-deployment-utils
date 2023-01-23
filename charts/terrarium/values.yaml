@@ -47,3 +47,14 @@ storage:
     pullPolicy: Always
 otelTraceEndpoint: "satellite-lightstep.infra.svc.cluster.local:8184"
 grpcDebug: "info"
+
+
+aws_access_key_id: dGVzdAo=
+aws_access_key_secret: dGVzdAo=
+aws_region: dGVzdAo=
+imagePullSecret: dGVzdAo=
+ingress:
+  host: terrarium.com
+tls:
+  crt: dGVzdAo=
+  key: dGVzdAo=
