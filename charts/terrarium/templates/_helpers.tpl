@@ -87,3 +87,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
   value: {{ .Values.otelTraceEndpoint }}
 {{- end }}
 {{- end }}
+{{- define "terrarium.grpcDebug" -}}
+{{- if .Values.grpcDebug }}
+- name: GRPC_GO_LOG_SEVERITY_LEVEL
+  value: {{ .Values.grpcDebug }}
+{{- end }}
+{{- end }}

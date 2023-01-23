@@ -46,8 +46,9 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
-                  key: VERSION_MANAGER_ENDPOINT
+                  key: VERSION_MANAGER_ENDPOINT              
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
+            {{ include "terrarium.grpcDebug" . | nindent 12 }}
           ports:
             - name: http
               containerPort: 3000

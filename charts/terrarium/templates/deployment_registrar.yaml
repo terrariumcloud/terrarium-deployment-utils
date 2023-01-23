@@ -50,6 +50,7 @@ spec:
                   key: AWS_DEFAULT_REGION
                   optional: false
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
+            {{ include "terrarium.grpcDebug" . | nindent 12 }}
           ports:
             - name: grpc
               containerPort: 3001
