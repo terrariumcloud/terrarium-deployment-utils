@@ -81,3 +81,15 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-web-ui
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.otelEndpoint" -}}
+{{- if .Values.otelTraceEndpoint }}
+- name: OTEL_EXPORTER_OTLP_ENDPOINT
+  value: {{ .Values.otelTraceEndpoint }}
+{{- end }}
+{{- end }}
+{{- define "terrarium.grpcDebug" -}}
+{{- if .Values.grpcDebug }}
+- name: GRPC_GO_LOG_SEVERITY_LEVEL
+  value: {{ .Values.grpcDebug }}
+{{- end }}
+{{- end }}
