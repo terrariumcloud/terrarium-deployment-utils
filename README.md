@@ -15,8 +15,8 @@ imagePullSecret: <BASE64_ENCODED_DOCKER_SECRET>
 ingress:
   host: <HOSTNAME>
 tls:
-  crt: <TLS_CERTIFICATE>
-  key: <TLS_KEY>
+  crt: <BASE64_ENCODED_TLS_CERTIFICATE>
+  key: <BASE64_ENCODED_TLS_KEY>
 ```
 
 1. Execute `helm install terrarium ./<PATH_TO CHART_ZIP>`
