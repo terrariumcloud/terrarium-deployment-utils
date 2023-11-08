@@ -81,6 +81,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-web-ui
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.releaseSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-release
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 {{- define "terrarium.otelEndpoint" -}}
 {{- if .Values.otelTraceEndpoint }}
 - name: OTEL_EXPORTER_OTLP_ENDPOINT
