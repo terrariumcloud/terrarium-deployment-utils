@@ -30,6 +30,16 @@ variable "terrarium_table_container_dependencies" {
   description = "Terrarium DynamoDB Table for terrarium container dependencies"
 }
 
+variable "terrarium_table_tag_manager" {
+  type        = string
+  description = "Terrarium DynamoDB Table for storing tags."
+}
+
+variable "terrarium_table_releases" {
+  type        = string
+  description = "Terrarium DynamoDB Table for all releases."
+}
+
 # IAM DynamoDB
 variable "terrarium_dynamodb_backup_iam_role_name" {
   type        = string
@@ -159,3 +169,8 @@ variable "terrarium_s3_backup_selection_name" {
   type        = string
   description = "The name of an S3 resource selection document."
 }
+
+# variable "aws_region" {
+#   type = string
+#   description = "AWS region"
+# }

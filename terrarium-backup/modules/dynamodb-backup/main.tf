@@ -10,14 +10,14 @@ resource "aws_kms_key" "terrarium_dynamodb_kms_key" {
 }
 
 resource "aws_kms_alias" "terrarium_dynamodb_kms_key_alias" {
-  name          = "${var.kms_key_alias_prefix}/${var.terrarium_dynamodb_kms_key_name}"
+  name          = "alias/${var.terrarium_dynamodb_kms_key_name}"
   target_key_id = aws_kms_key.terrarium_dynamodb_kms_key.arn
 }
 
 # Backup vault for DynamoDB
 resource "aws_backup_vault" "terrarium_dynamodb_backup_vault" {
-  name        = var.terrarium_dynamodb_backup_vault_name
-  kms_key_arn = aws_kms_key.terrarium_dynamodb_kms_key.arn
+  name          = var.terrarium_dynamodb_backup_vault_name
+  kms_key_arn   = aws_kms_key.terrarium_dynamodb_kms_key.arn
   force_destroy = true
 }
 
@@ -56,6 +56,8 @@ resource "aws_backup_selection" "terrarium_dynamodb_backup_selection" {
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_modules}",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_versions}",
     "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_module_dependencies}",
-    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_container_dependencies}"
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_container_dependencies}",
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_tag_manager}",
+    "arn:aws:dynamodb:${local.region}:${local.account_id}:table/${var.terrarium_table_releases}"
   ]
 }
