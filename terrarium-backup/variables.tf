@@ -169,8 +169,3 @@ variable "terrarium_s3_backup_selection_name" {
   type        = string
   description = "The name of an S3 resource selection document."
 }
-
-# variable "aws_region" {
-#   type = string
-#   description = "AWS region"
-# }
