@@ -10,14 +10,14 @@ resource "aws_kms_key" "terrarium_s3_kms_key" {
 }
 
 resource "aws_kms_alias" "terrarium_s3_kms_key_alias" {
-  name          = "${var.kms_key_alias_prefix}/${var.terrarium_s3_kms_key_name}"
+  name          = "alias/${var.terrarium_s3_kms_key_name}"
   target_key_id = aws_kms_key.terrarium_s3_kms_key.arn
 }
 
 # Backup vault for S3
 resource "aws_backup_vault" "terrarium_s3_backup_vault" {
-  name        = var.terrarium_s3_backup_vault_name
-  kms_key_arn = aws_kms_key.terrarium_s3_kms_key.arn
+  name          = var.terrarium_s3_backup_vault_name
+  kms_key_arn   = aws_kms_key.terrarium_s3_kms_key.arn
   force_destroy = true
 }
 

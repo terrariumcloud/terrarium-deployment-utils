@@ -5,6 +5,12 @@ terraform {
       version = "4.31.0"
     }
   }
+
+  backend "s3" {
+    bucket = "terrarium-backup-state"
+    key    = "terrarium-backup"
+    region = "eu-west-1"
+  }
 }
 
 provider "aws" {}
@@ -16,6 +22,8 @@ module "dynamodb-backup" {
   terrarium_table_module_versions             = var.terrarium_table_module_versions
   terrarium_table_module_dependencies         = var.terrarium_table_module_dependencies
   terrarium_table_container_dependencies      = var.terrarium_table_container_dependencies
+  terrarium_table_tag_manager                 = var.terrarium_table_tag_manager
+  terrarium_table_releases                    = var.terrarium_table_releases
   kms_key_alias_prefix                        = var.kms_key_alias_prefix
   terrarium_dynamodb_kms_key_name             = var.terrarium_dynamodb_kms_key_name
   terrarium_dynamodb_backup_iam_role_name     = var.terrarium_dynamodb_backup_iam_role_name

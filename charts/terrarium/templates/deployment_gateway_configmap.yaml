@@ -8,3 +8,5 @@ data:
   VERSION_MANAGER_ENDPOINT: {{ include "terrarium.fullname" . }}-version-manager.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
   DEPENDENCY_MANAGER_ENDPOINT: {{ include "terrarium.fullname" . }}-dependency-manager.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
   STORAGE_ENDPOINT: {{ include "terrarium.fullname" . }}-storage.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
+  TAG_MANAGER_ENDPOINT: {{ include "terrarium.fullname" . }}-tag-manager.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080
+  RELEASE_ENDPOINT: {{ include "terrarium.fullname" . }}-release.{{ include "terrarium.fullname" . }}.svc.cluster.local:8080

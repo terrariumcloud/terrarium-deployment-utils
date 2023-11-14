@@ -72,6 +72,16 @@ spec:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
                   key: DEPENDENCY_MANAGER_ENDPOINT
+            - name: TAG_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: TAG_MANAGER_ENDPOINT
+            - name: RELEASE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: RELEASE_ENDPOINT
             - name: STORAGE_ENDPOINT
               valueFrom:
                 configMapKeyRef:
