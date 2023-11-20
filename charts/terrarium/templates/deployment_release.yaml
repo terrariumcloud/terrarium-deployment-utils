@@ -49,6 +49,12 @@ spec:
                   name: {{ include "terrarium.fullname" . }}
                   key: AWS_DEFAULT_REGION
                   optional: false
+            - name: WEBHOOK
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "terrarium.fullname" . }}
+                  key: WEBHOOK
+                  optional: false
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
             {{ include "terrarium.grpcDebug" . | nindent 12 }}
           ports:

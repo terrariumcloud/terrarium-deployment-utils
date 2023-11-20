@@ -58,6 +58,7 @@ grpcDebug: "info"
 aws_access_key_id: dGVzdAo=
 aws_access_key_secret: dGVzdAo=
 aws_region: dGVzdAo=
+webhook: dGVzdAo=
 imagePullSecret: dGVzdAo=
 ingress:
   host: terrarium.com
