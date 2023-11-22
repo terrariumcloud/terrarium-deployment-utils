@@ -49,6 +49,8 @@ spec:
                   name: {{ include "terrarium.fullname" . }}
                   key: AWS_DEFAULT_REGION
                   optional: false
+            - name: WEBHOOK
+              value: {{ .Values.webhook | default "" | quote }}
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
             {{ include "terrarium.grpcDebug" . | nindent 12 }}
           ports:
