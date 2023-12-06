@@ -30,6 +30,8 @@ spec:
             - "$(DEPENDENCY_MANAGER_ENDPOINT)"
             - "--version-manager"
             - "$(VERSION_MANAGER_ENDPOINT)"
+            - "--release"
+            - "$(RELEASE_ENDPOINT)"
             - "--storage"
             - "$(STORAGE_ENDPOINT)"
             - "--aws-access-key-id"
