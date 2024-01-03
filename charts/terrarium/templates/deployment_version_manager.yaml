@@ -24,6 +24,8 @@ spec:
           imagePullPolicy: {{ .Values.versionManager.image.pullPolicy }}
           args: 
             - "version-manager"
+            - "--release"
+            - "$(RELEASE_ENDPOINT)"
             - "--aws-access-key-id"
             - "$(AWS_ACCESS_KEY_ID)"
             - "--aws-secret-access-key"
@@ -49,6 +51,11 @@ spec:
                   name: {{ include "terrarium.fullname" . }}
                   key: AWS_DEFAULT_REGION
                   optional: false
+            - name: RELEASE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: RELEASE_ENDPOINT
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}     
           ports:
             - name: grpc
