@@ -22,6 +22,13 @@ spec:
             name: {{ include "terrarium.fullname" . }}-modules-api-v1
             port:
               name: http
+      - path: {{ .Values.providers_api_v1_service.ingress.path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "terrarium.fullname" . }}-providers-api-v1
+            port:
+              name: http
       - path: {{ .Values.browse_service.ingress.path }}
         pathType: Prefix
         backend:

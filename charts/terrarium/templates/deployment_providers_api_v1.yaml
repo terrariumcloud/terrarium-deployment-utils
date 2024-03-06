@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "terrarium.fullname" . }}-providers-api-v1
+  namespace: {{ include "terrarium.fullname" . }}
+  labels:
+    {{- include "terrarium.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.providers_api_v1_service.replicas }}
+  selector:
+    matchLabels:
+      {{- include "terrarium.providersAPIV1SelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "terrarium.providersAPIV1SelectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ include "terrarium.fullname" . }}-regcred
+      serviceAccountName: "default"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.providers_api_v1_service.image.repository }}:{{ .Values.providers_api_v1_service.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.providers_api_v1_service.image.pullPolicy }}
+          args:
+            - "providers.v1"
+            - "--endpoint"
+            - "0.0.0.0:3000"
+            - "--mount-path"
+            - "/providers"
+            - "--aws-access-key-id"
+            - "not-used"
+            - "--aws-region"
+            - "not-used"
+            - "--aws-secret-access-key"
+            - "not-used"
+          env:
+            {{ include "terrarium.otelEndpoint" . | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http

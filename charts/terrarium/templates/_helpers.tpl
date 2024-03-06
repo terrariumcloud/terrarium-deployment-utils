@@ -53,6 +53,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-modules-api-v1
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.providersAPIV1SelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-providers-api-v1
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 {{- define "terrarium.browseSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-browse
 app.kubernetes.io/instance: {{ .Release.Name }}
