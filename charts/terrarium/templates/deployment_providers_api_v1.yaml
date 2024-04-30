@@ -28,6 +28,10 @@ spec:
             - "0.0.0.0:3000"
             - "--mount-path"
             - "/providers"
+            - "--provider-version-manager"
+            - "$(PROVIDER_VERSION_MANAGER_ENDPOINT)"
+            - "--provider-storage"
+            - "$(PROVIDER_STORAGE_ENDPOINT)"
             - "--aws-access-key-id"
             - "not-used"
             - "--aws-region"
@@ -35,6 +39,16 @@ spec:
             - "--aws-secret-access-key"
             - "not-used"
           env:
+            - name: PROVIDER_VERSION_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: PROVIDER_VERSION_MANAGER_ENDPOINT
+            - name: PROVIDER_STORAGE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: PROVIDER_STORAGE_ENDPOINT
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
           ports:
             - name: http
