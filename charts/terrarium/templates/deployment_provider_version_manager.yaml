@@ -9,11 +9,11 @@ spec:
   replicas: {{ .Values.providerVersionManager.replicas }}
   selector:
     matchLabels:
-      {{- include "terrarium.versionManagerSelectorLabels" . | nindent 6 }}
+      {{- include "terrarium.providerVersionManagerSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "terrarium.versionManagerSelectorLabels" . | nindent 8 }}
+        {{- include "terrarium.providerVersionManagerSelectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ include "terrarium.fullname" . }}-regcred
