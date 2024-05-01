@@ -81,6 +81,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-storage
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.providerVersionManagerSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-provider-version-manager
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+{{- define "terrarium.providerStorageSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-provider-storage
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 {{- define "terrarium.webSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-web-ui
 app.kubernetes.io/instance: {{ .Release.Name }}

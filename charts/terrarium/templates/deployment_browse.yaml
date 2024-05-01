@@ -30,6 +30,8 @@ spec:
             - "$(REGISTRAR_ENDPOINT)"
             - "--version-manager"
             - "$(VERSION_MANAGER_ENDPOINT)"
+            - "--provider-version-manager"
+            - "$(PROVIDER_VERSION_MANAGER_ENDPOINT)"
             - "--release"
             - "$(RELEASE_ENDPOINT)"
             - "--aws-access-key-id"
@@ -54,6 +56,11 @@ spec:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
                   key: RELEASE_ENDPOINT              
+            - name: PROVIDER_VERSION_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: PROVIDER_VERSION_MANAGER_ENDPOINT
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
             {{ include "terrarium.grpcDebug" . | nindent 12 }}
           ports:

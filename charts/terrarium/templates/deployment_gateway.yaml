@@ -34,6 +34,10 @@ spec:
             - "$(RELEASE_ENDPOINT)"
             - "--storage"
             - "$(STORAGE_ENDPOINT)"
+            - "--provider-version-manager"
+            - "$(PROVIDER_VERSION_MANAGER_ENDPOINT)"
+            - "--provider-storage"
+            - "$(PROVIDER_STORAGE_ENDPOINT)"
             - "--aws-access-key-id"
             - "$(AWS_ACCESS_KEY_ID)"
             - "--aws-secret-access-key"
@@ -89,6 +93,16 @@ spec:
                 configMapKeyRef:
                   name: {{ include "terrarium.fullname" . }}-gateway-cm
                   key: STORAGE_ENDPOINT
+            - name: PROVIDER_VERSION_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: PROVIDER_VERSION_MANAGER_ENDPOINT
+            - name: PROVIDER_STORAGE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "terrarium.fullname" . }}-gateway-cm
+                  key: PROVIDER_STORAGE_ENDPOINT
             {{ include "terrarium.otelEndpoint" . | nindent 12 }}
           ports:
             - name: grpc
