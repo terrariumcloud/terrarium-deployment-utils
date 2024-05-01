@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   terrarium:
   - apiVersion: v2
+    appVersion: 0.0.80
+    created: "2024-05-01T16:52:19.379210847Z"
+    description: A Helm chart for Kubernetes
+    digest: c4793544432e50f241b4935399e75dece420d9bfab147d2e97693966a8510454
+    maintainers:
+    - name: adcharre
+    - name: odelanno
+    - name: frennky
+    name: terrarium
+    type: application
+    urls:
+    - https://github.com/terrariumcloud/terrarium-deployment-utils/releases/download/terrarium-0.0.27/terrarium-0.0.27.tgz
+    version: 0.0.27
+  - apiVersion: v2
     appVersion: 0.0.76
     created: "2024-03-06T13:53:06.24282914Z"
     description: A Helm chart for Kubernetes
@@ -227,4 +241,4 @@ entries:
     urls:
     - https://github.com/terrariumcloud/terrarium-deployment-utils/releases/download/terrarium-0.0.9/terrarium-0.0.9.tgz
     version: 0.0.9
-generated: "2024-03-06T13:53:06.243021277Z"
+generated: "2024-05-01T16:52:19.379344236Z"
