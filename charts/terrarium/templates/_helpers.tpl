@@ -57,6 +57,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-providers-api-v1
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "terrarium.nginxStaticServerSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "terrarium.name" . }}-nginx-static-server
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 {{- define "terrarium.browseSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "terrarium.name" . }}-browse
 app.kubernetes.io/instance: {{ .Release.Name }}

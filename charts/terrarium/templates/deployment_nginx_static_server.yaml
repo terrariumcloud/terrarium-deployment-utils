@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "terrarium.fullname" . }}-nginx-static-server
+  namespace: {{ include "terrarium.fullname" . }}
+  labels:
+    {{- include "terrarium.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.nginx_static_server.replicas }}
+  selector:
+    matchLabels:
+      {{- include "terrarium.nginxStaticServerSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "terrarium.nginxStaticServerSelectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ include "terrarium.fullname" . }}-regcred
+      serviceAccountName: "default"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.nginx_static_server.image.repository }}:{{ .Values.nginx_static_server.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.nginx_static_server.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
