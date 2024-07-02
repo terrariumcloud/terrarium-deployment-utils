@@ -40,6 +40,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ include "terrarium.fullname" . }}-nginx-static-server
+            name: nginx-static-server
             port:
               name: http

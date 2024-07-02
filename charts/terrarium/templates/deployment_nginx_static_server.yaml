@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "terrarium.fullname" . }}-nginx-static-server
-  namespace: {{ include "terrarium.fullname" . }}
+  name: nginx-static-server
+  namespace: nginx
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: {{ .Values.nginx_static_server.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 80
               protocol: TCP
 
           livenessProbe:
