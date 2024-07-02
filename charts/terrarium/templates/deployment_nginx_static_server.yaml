@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-static-server
-  namespace: nginx
+  namespace: {{ include "terrarium.fullname" . }}
   labels:
     {{- include "terrarium.labels" . | nindent 4 }}
 spec:
@@ -27,11 +27,3 @@ spec:
               containerPort: 80
               protocol: TCP
 
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: http
